@@ -1,0 +1,335 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Para Anette 🌸</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Josefin+Sans:wght@200;300;700&display=swap" rel="stylesheet">
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+body {
+  font-family: 'Cormorant Garamond', serif;
+  background: #fff0f5;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+#canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── INTRO ── */
+#intro {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2rem;
+}
+
+.sun {
+  font-size: 3.5rem;
+  margin-bottom: 1.2rem;
+  animation: spin 6s linear infinite;
+}
+@keyframes spin {
+  from { transform: rotate(0deg) scale(1); }
+  50%  { transform: rotate(180deg) scale(1.15); }
+  to   { transform: rotate(360deg) scale(1); }
+}
+
+#intro h1 {
+  font-size: clamp(3rem, 10vw, 5.5rem);
+  font-style: italic;
+  font-weight: 400;
+  background: linear-gradient(135deg, #ff6eb4, #ff9de2, #ffb347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.5rem;
+  line-height: 1.1;
+}
+
+.tagline {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.78rem;
+  letter-spacing: 0.38em;
+  text-transform: uppercase;
+  color: #e887b8;
+  margin-bottom: 2.8rem;
+}
+
+.blob-btn {
+  background: linear-gradient(135deg, #ff6eb4, #ff9de2);
+  border: none;
+  color: #fff;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 1rem 3rem;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 0 8px 28px rgba(255,110,180,0.35);
+  transition: all 0.3s ease;
+}
+.blob-btn:hover {
+  transform: scale(1.06) translateY(-2px);
+  box-shadow: 0 12px 36px rgba(255,110,180,0.45);
+}
+
+/* ── MAIN ── */
+#main {
+  display: none;
+  position: relative;
+  z-index: 1;
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 4vh 1.5rem 5rem;
+}
+#main.show {
+  display: block;
+  animation: rise 1s cubic-bezier(.22,1,.36,1) forwards;
+}
+@keyframes rise {
+  from { opacity:0; transform:translateY(24px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 2.5rem;
+}
+.header .icons {
+  font-size: 2rem;
+  letter-spacing: 0.3em;
+  margin-bottom: 0.8rem;
+}
+.header h2 {
+  font-size: clamp(1.6rem, 5vw, 2.3rem);
+  font-style: italic;
+  background: linear-gradient(135deg, #ff6eb4, #ffb347);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin-bottom: 0.3rem;
+}
+.header p {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.7rem;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #e887b8;
+}
+
+.card {
+  background: #fff;
+  border-radius: 24px;
+  padding: 2rem 2rem 2.4rem;
+  margin-bottom: 1.4rem;
+  box-shadow: 0 4px 32px rgba(255,110,180,0.12);
+  border: 1.5px solid rgba(255,157,226,0.3);
+}
+
+.card-tag {
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.35em;
+  text-transform: uppercase;
+  color: #ff9de2;
+  margin-bottom: 1.4rem;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.card-tag::after {
+  content: '';
+  flex: 1;
+  height: 1.5px;
+  background: linear-gradient(to right, #ffb3df, transparent);
+  border-radius: 2px;
+}
+
+.message {
+  font-size: 1.05rem;
+  line-height: 1.95;
+  color: #5a3a4a;
+  font-style: italic;
+}
+.message p { margin-bottom: 1rem; }
+.message p:last-child { margin-bottom: 0; }
+
+.icon-row {
+  text-align: center;
+  font-size: 1.5rem;
+  letter-spacing: 0.5em;
+  margin: 1.6rem 0 1.2rem;
+}
+
+.firma {
+  text-align: right;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: #ff6eb4;
+}
+.firma::before { content: '— '; }
+
+.pill {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffecf5, #fff4e0);
+  border: 1px solid rgba(255,157,226,0.4);
+  border-radius: 50px;
+  padding: 0.5rem 1.4rem;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.75rem;
+  color: #e887b8;
+  letter-spacing: 0.1em;
+  margin: 0 0.3rem 0.6rem;
+}
+
+.pills-row {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.btn-back {
+  display: block;
+  margin: 2rem auto 0;
+  background: transparent;
+  border: 1.5px solid rgba(255,110,180,0.35);
+  color: #e887b8;
+  font-family: 'Josefin Sans', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  text-transform: uppercase;
+  padding: 0.7rem 2rem;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.btn-back:hover {
+  background: rgba(255,110,180,0.08);
+}
+</style>
+</head>
+<body>
+
+<canvas id="canvas"></canvas>
+
+<section id="intro">
+  <div class="sun">🌟</div>
+  <h1>Anette</h1>
+  <p class="tagline">Esto es para ti ✨</p>
+  <button class="blob-btn" onclick="entrar()">Abrir ✦</button>
+</section>
+
+<section id="main">
+  <div class="header">
+    <div class="icons">🌸 💛 🌺 💖 🌼</div>
+    <h2>¡Hola, Anette!</h2>
+    <p>que tengas el mejor día</p>
+  </div>
+
+  <div class="pills-row">
+    <span class="pill">✨ Eres increíble</span>
+    <span class="pill">🌸 Hoy es tu día</span>
+    <span class="pill">💛 Sonríe mucho</span>
+  </div>
+
+  <div class="card">
+    <div class="card-tag">Un mensaje para ti</div>
+    <div class="message">
+      <p>Espero que hoy sea uno de esos días que recuerdas con una sonrisa. De esos en los que todo fluye, el sol se siente más cálido y las cosas pequeñas te alegran sin razón.</p>
+      <p>Mereces días así, llenos de cosas bonitas y momentos que te hagan sentir bien. Y si el día no empieza perfecto, espero que este mensajito lo mejore aunque sea un poquito.</p>
+      <p>¡Que tengas un día increíble, Anette! 🌸</p>
+    </div>
+    <div class="icon-row">🌷 🌼 💛 🌺 ✨</div>
+    <p class="firma">Con cariño</p>
+  </div>
+
+  <button class="btn-back" onclick="volver()">← volver</button>
+</section>
+
+<script>
+const canvas = document.getElementById('canvas');
+const ctx = canvas.getContext('2d');
+const items = ['🌸','💛','🌺','✨','💖','🌼','⭐','🎀'];
+let particles = [];
+
+function resize() {
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener('resize', resize);
+
+for (let i = 0; i < 20; i++) {
+  particles.push({
+    x: Math.random() * (window.innerWidth || 400),
+    y: Math.random() * (window.innerHeight || 700),
+    size: 12 + Math.random() * 14,
+    speed: 0.5 + Math.random() * 0.8,
+    drift: (Math.random() - 0.5) * 0.8,
+    rot: Math.random() * Math.PI * 2,
+    rotSpeed: (Math.random() - 0.5) * 0.05,
+    emoji: items[Math.floor(Math.random() * items.length)],
+    opacity: 0.4 + Math.random() * 0.4
+  });
+}
+
+function draw() {
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  particles.forEach(p => {
+    ctx.save();
+    ctx.globalAlpha = p.opacity;
+    ctx.font = p.size + 'px serif';
+    ctx.translate(p.x, p.y);
+    ctx.rotate(p.rot);
+    ctx.fillText(p.emoji, -p.size/2, p.size/2);
+    ctx.restore();
+    p.y += p.speed;
+    p.x += p.drift;
+    p.rot += p.rotSpeed;
+  });
+  particles = particles.filter(p => p.y < canvas.height + 60);
+  if (Math.random() < 0.06) {
+    particles.push({
+      x: Math.random() * canvas.width,
+      y: -30,
+      size: 12 + Math.random() * 14,
+      speed: 0.5 + Math.random() * 0.8,
+      drift: (Math.random() - 0.5) * 0.8,
+      rot: 0,
+      rotSpeed: (Math.random() - 0.5) * 0.05,
+      emoji: items[Math.floor(Math.random() * items.length)],
+      opacity: 0.4 + Math.random() * 0.4
+    });
+  }
+  requestAnimationFrame(draw);
+}
+draw();
+
+function entrar() {
+  document.getElementById('intro').style.display = 'none';
+  document.getElementById('main').classList.add('show');
+}
+
+function volver() {
+  document.getElementById('main').classList.remove('show');
+  document.getElementById('main').style.display = 'none';
+  document.getElementById('intro').style.display = 'flex';
+}
+</script>
+</body>
+</html>
